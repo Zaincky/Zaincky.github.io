@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Métodos de Pago - Zaincky</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .payment-hero {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+            padding: calc(80px + var(--space-lg)) 0 var(--space-lg) 0;
+            text-align: center;
+        }
+        
+        .payment-summary {
+            background: var(--bg-secondary);
+            border: 2px solid var(--accent-primary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            text-align: center;
+        }
+        
+        .payment-summary h2 {
+            color: var(--accent-primary);
+            margin-bottom: var(--space-md);
+        }
+        
+        .plan-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .plan-detail {
+            text-align: center;
+        }
+        
+        .plan-detail .label {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .plan-detail .value {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .plan-detail .value.price {
+            font-size: var(--font-size-2xl);
+            color: var(--accent-primary);
+        }
+        
+        .savings-badge {
+            background: var(--success);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 16px;
+            font-size: var(--font-size-sm);
+            font-weight: 600;
+            display: inline-block;
+            margin-top: var(--space-xs);
+        }
+        
+        .payment-methods {
+            display: grid;
+            gap: var(--space-md);
+        }
+        
+        .payment-method {
+            background: var(--bg-secondary);
+            border: 2px solid var(--bg-tertiary);
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            transition: var(--transition-normal);
+            cursor: pointer;
+        }
+        
+        .payment-method:hover {
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .payment-method.selected {
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+        }
+        
+        .payment-method-header {
+            padding: var(--space-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            background: var(--bg-primary);
+        }
+        
+        .payment-method-header i {
+            font-size: var(--font-size-xl);
+            color: var(--accent-primary);
+            min-width: 30px;
+        }
+        
+        .payment-method-header h3 {
+            flex: 1;
+            margin: 0;
+            color: var(--text-primary);
+        }
+        
+        .processing-time {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: var(--font-size-sm);
+        }
+        
+        .payment-method-content {
+            padding: var(--space-md);
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        
+        .payment-method.selected .payment-method-content {
+            display: block;
+        }
+        
+        .payment-info {
+            margin-bottom: var(--space-md);
+        }
+        
+        .crypto-info .address-container {
+            margin-bottom: var(--space-sm);
+        }
+        
+        .crypto-info label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .address-field {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .address-field input {
+            flex: 1;
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius);
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-family: monospace;
+            font-size: var(--font-size-sm);
+        }
+        
+        .copy-btn {
+            background: var(--accent-primary);
+            border: none;
+            border-radius: var(--border-radius);
+            color: white;
+            padding: 10px 12px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .copy-btn:hover {
+            background: var(--accent-secondary);
+        }
+        
+        .network-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: var(--space-sm);
+            margin-top: var(--space-sm);
+        }
+        
+        .network-info p {
+            margin: 0;
+            padding: 8px;
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            font-size: var(--font-size-sm);
+        }
+        
+        .warning {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: var(--border-radius);
+            padding: var(--space-sm);
+            margin-top: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .warning i {
+            color: var(--warning);
+        }
+        
+        .bank-info, .mobile-payment-info, .digital-payment-info {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            padding: var(--space-md);
+        }
+        
+        .account-details p {
+            margin-bottom: var(--space-xs);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .copyable {
+            background: var(--bg-tertiary);
+            padding: 2px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        
+        .copyable:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        .qr-container {
+            text-align: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .qr-code {
+            max-width: 200px;
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mobile-details {
+            text-align: center;
+        }
+        
+        .paypal-note {
+            background: rgba(0, 123, 255, 0.1);
+            border: 1px solid #007bff;
+            border-radius: var(--border-radius);
+            padding: var(--space-sm);
+            margin-top: var(--space-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .paypal-note i {
+            color: #007bff;
+        }
+        
+        .payment-instructions {
+            margin-bottom: var(--space-md);
+        }
+        
+        .payment-instructions h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .payment-instructions ol {
+            color: var(--text-secondary);
+            padding-left: var(--space-md);
+        }
+        
+        .payment-instructions li {
+            margin-bottom: var(--space-xs);
+            line-height: 1.5;
+        }
+        
+        .payment-actions {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .payment-actions .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .payment-confirmation-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            padding: var(--space-md);
+        }
+        
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: var(--border-radius-lg);
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .modal-header {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--bg-tertiary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            color: var(--text-primary);
+        }
+        
+        .close-modal {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: var(--font-size-lg);
+            cursor: pointer;
+            padding: 4px;
+        }
+        
+        .close-modal:hover {
+            color: var(--text-primary);
+        }
+        
+        .modal-body {
+            padding: var(--space-md);
+        }
+        
+        .payment-summary-modal {
+            background: var(--bg-primary);
+            border-radius: var(--border-radius);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .payment-summary-modal h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--accent-primary);
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .summary-item span {
+            color: var(--text-secondary);
+        }
+        
+        .next-steps {
+            margin-bottom: var(--space-md);
+        }
+        
+        .next-steps h4 {
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .next-steps ol {
+            color: var(--text-secondary);
+            padding-left: var(--space-md);
+        }
+        
+        .next-steps li {
+            margin-bottom: var(--space-xs);
+        }
+        
+        .modal-footer {
+            padding: var(--space-md);
+            border-top: 1px solid var(--bg-tertiary);
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+        }
+        
+        .modal-footer .btn {
+            flex: 1;
+            min-width: 120px;
+        }
+        
+        .change-plan {
+            text-align: center;
+            margin-top: var(--space-lg);
+        }
+        
+        .change-plan a {
+            color: var(--accent-primary);
+            text-decoration: none;
+        }
+        
+        .change-plan a:hover {
+            text-decoration: underline;
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--success);
+            color: white;
+            padding: 15px 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+            z-index: 10001;
+            animation: slideInRight 0.3s ease;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="../index.html">
+                        <h1 class="logo">Zaincky</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../index.html#courses">Cursos</a></li>
+                    <li><a href="../index.html#testimonials">Testimonios</a></li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Payment Hero -->
+    <section class="payment-hero">
+        <div class="container">
+            <h1>Completa tu Suscripción</h1>
+            <p>Elige tu método de pago preferido y comienza tu transformación hoy</p>
+        </div>
+        
+    </section>
+
+    <!-- Payment Content -->
+    <section class="payment-content">
+        <div class="container" style="max-width: 800px;">
+            <!-- Payment Summary -->
+            <div class="payment-summary">
+                <h2>Resumen de tu Suscripción</h2>
+                <div class="plan-details">
+                    <div class="plan-detail">
+                        <div class="label">Plan Seleccionado</div>
+                        <div class="value" id="selectedPlanName">Plan Mensual</div>
+                    </div>
+                    <div class="plan-detail">
+                        <div class="label">Duración</div>
+                        <div class="value" id="selectedPlanPeriod">1 mes</div>
+                    </div>
+                    <div class="plan-detail">
+                        <div class="label">Total a Pagar</div>
+                        <div class="value price" id="selectedPlanAmount">$15 USD</div>
+                    </div>
+                    <div class="plan-detail">
+                        <div class="label">Acceso</div>
+                        <div class="value">Inmediato</div>
+                    </div>
+                </div>
+                <div id="planSavings" style="display: none;">
+                    <span class="savings-badge">¡Ahorras $5!</span>
+                </div>
+                <div class="warning"><i class="fas fa-exclamation-triangle"></i> IMPORTANTE: Si te encuentras fuera de Perú, te recomendamos realizar tu pago mediante criptomonedas para mayor facilidad y rapidez en el proceso.</div>
+            </div>
+
+            <!-- Payment Methods -->
+            <div class="payment-methods" id="paymentMethods">
+                <!-- Los métodos de pago se cargan dinámicamente -->
+            </div>
+
+            <!-- Change Plan -->
+            <div class="change-plan">
+                <p><a href="../index.html#pricing">¿Quieres cambiar de plan? Haz clic aquí</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zaincky</h3>
+                    <p>Transformando vidas a través de la educación en negocios digitales</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../index.html#courses">Cursos</a></li>
+                        <li><a href="../index.html#testimonials">Testimonios</a></li>
+                        <li><a href="about.html">Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zaincky. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../models/courses.js"></script>
+    <script src="../models/payments.js"></script>
+    <script src="../controllers/payment.js"></script>
+    <script src="../assets/js/utils.js"></script>
+    <script>
+        // Configurar navegación móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Cerrar menú al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

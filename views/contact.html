@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto - Zaincky</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .contact-hero {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+            padding: calc(80px + var(--space-xl)) 0 var(--space-xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        .contact-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .contact-hero h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .contact-hero p {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .contact-content {
+            padding: var(--space-xl) 0;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: start;
+        }
+        
+        .contact-info {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+        }
+        
+        .contact-info h2 {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+        }
+        
+        .contact-methods {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .contact-method {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius);
+            transition: var(--transition-normal);
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .contact-method:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .method-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .method-info h3 {
+            font-size: var(--font-size-lg);
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .method-info p {
+            color: var(--text-secondary);
+            margin-bottom: var(--space-xs);
+            font-size: var(--font-size-sm);
+        }
+        
+        .method-info .contact-value {
+            color: var(--accent-primary);
+            font-weight: 600;
+        }
+        
+        .contact-form {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+        }
+        
+        .contact-form h2 {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
+            color: var(--text-primary);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: var(--space-xs);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius);
+            padding: 12px 16px;
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            transition: var(--transition-fast);
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 2px rgba(0, 212, 255, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-md);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            background: var(--accent-gradient);
+            border: none;
+            border-radius: var(--border-radius);
+            color: white;
+            padding: 14px 24px;
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-normal);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .faq-section {
+            padding: var(--space-xl) 0;
+            background: var(--bg-secondary);
+        }
+        
+        .faq-grid {
+            display: grid;
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .faq-item {
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition-normal);
+        }
+        
+        .faq-item:hover {
+            border-color: var(--accent-primary);
+        }
+        
+        .faq-question {
+            width: 100%;
+            background: none;
+            border: none;
+            padding: var(--space-md);
+            text-align: left;
+            color: var(--text-primary);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition-fast);
+        }
+        
+        .faq-question:hover {
+            background: var(--bg-tertiary);
+        }
+        
+        .faq-question i {
+            color: var(--accent-primary);
+            transition: var(--transition-fast);
+        }
+        
+        .faq-question.active i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            padding: 0 var(--space-md) var(--space-md);
+            color: var(--text-secondary);
+            line-height: 1.6;
+            display: none;
+        }
+        
+        .faq-answer.active {
+            display: block;
+            animation: fadeInDown 0.3s ease;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .support-hours {
+            background: rgba(0, 212, 255, 0.1);
+            border: 1px solid var(--accent-primary);
+            border-radius: var(--border-radius);
+            padding: var(--space-md);
+            margin-top: var(--space-lg);
+            text-align: center;
+        }
+        
+        .support-hours h3 {
+            color: var(--accent-primary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .support-hours p {
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .response-time {
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius);
+            padding: var(--space-md);
+            margin-top: var(--space-md);
+            text-align: center;
+        }
+        
+        .response-time h4 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-xs);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+        }
+        
+        .response-time i {
+            color: var(--success);
+        }
+        
+        .response-time p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin: 0;
+        }
+        
+        .form-note {
+            background: rgba(255, 215, 0, 0.1);
+            border: 1px solid var(--warning);
+            border-radius: var(--border-radius);
+            padding: var(--space-sm);
+            margin-bottom: var(--space-md);
+            font-size: var(--font-size-sm);
+            color: var(--text-secondary);
+        }
+        
+        .form-note i {
+            color: var(--warning);
+            margin-right: var(--space-xs);
+        }
+        
+        .success-message {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--success);
+            border-radius: var(--border-radius);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            color: var(--success);
+            text-align: center;
+            display: none;
+        }
+        
+        .success-message i {
+            margin-right: var(--space-xs);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="../index.html">
+                        <h1 class="logo">Zaincky</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../index.html#courses">Cursos</a></li>
+                    <li><a href="../index.html#testimonials">Testimonios</a></li>
+                    <li><a href="about.html">Nosotros</a></li>
+                    <li><a href="contact.html" class="active">Contacto</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Contact Hero -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Contáctanos</h1>
+            <p>¿Tienes preguntas sobre nuestros cursos? ¿Necesitas ayuda con tu suscripción? Estamos aquí para ayudarte. Contáctanos a través de cualquiera de nuestros canales.</p>
+        </div>
+    </section>
+
+    <!-- Contact Content -->
+    <section class="contact-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Information -->
+                <div class="contact-info">
+                    <h2>Información de Contacto</h2>
+                    
+                    <div class="contact-methods">
+                        <a href="https://wa.me/51927703410" target="_blank" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-whatsapp"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>WhatsApp</h3>
+                                <p>Respuesta inmediata para consultas urgentes</p>
+                                <span class="contact-value">+51 927 703 410</span>
+                            </div>
+                        </a>
+                        
+                        <a href="https://t.me/Zaincky" target="_blank" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>Telegram</h3>
+                                <p>Chat directo con nuestro equipo de soporte</p>
+                                <span class="contact-value">@Zaincky</span>
+                            </div>
+                        </a>
+                        
+                        <a href="mailto:zaincky@gmail.com" class="contact-method">
+                            <div class="method-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>Email</h3>
+                                <p>Para consultas detalladas y soporte técnico</p>
+                                <span class="contact-value">zaincky@gmail.com</span>
+                            </div>
+                        </a>
+                        <!--
+                        <div class="contact-method" style="cursor: default;">
+                            <div class="method-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="method-info">
+                                <h3>Ubicación</h3>
+                                <p>Oficinas principales en Lima, Perú</p>
+                                <span class="contact-value">Lima, Lima Province, PE</span>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                    
+                    <div class="support-hours">
+                        <h3>Horarios de Atención</h3>
+                        <p><strong>Lunes a Viernes:</strong> 20:00 PM - 23:59 PM (GMT-5)</p>
+                        <p><strong>Sábados:</strong> Solo emergencias</p>
+                        <p><strong>Domingos:</strong> Solo emergencias</p>
+                    </div>
+                    
+                    <div class="response-time">
+                        <h4><i class="fas fa-clock"></i> Tiempo de Respuesta</h4>
+                        <p>WhatsApp/Telegram: Inmediato - 2 horas</p>
+                        <p>Email: 24-48 horas</p>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h2>Envíanos un Mensaje</h2>
+                    
+                    <div class="success-message" id="successMessage">
+                        <i class="fas fa-check-circle"></i>
+                        ¡Mensaje enviado correctamente! Te responderemos pronto.
+                    </div>
+                    
+                    <div class="form-note">
+                        <i class="fas fa-info-circle"></i>
+                        Para consultas urgentes, recomendamos usar WhatsApp o Telegram para una respuesta más rápida.
+                    </div>
+                    
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="firstName">Nombre *</label>
+                                <input type="text" id="firstName" name="firstName" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastName">Apellido *</label>
+                                <input type="text" id="lastName" name="lastName" required>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="email">Email *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Teléfono</label>
+                                <input type="tel" id="phone" name="phone">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="subject">Asunto *</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Selecciona un tema</option>
+                                <option value="general">Consulta General</option>
+                                <option value="courses">Información sobre Cursos</option>
+                                <option value="payment">Problemas de Pago</option>
+                                <option value="technical">Soporte Técnico</option>
+                                <option value="refund">Reembolsos</option>
+                                <option value="partnership">Asociaciones</option>
+                                <option value="other">Otro</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="message">Mensaje *</label>
+                            <textarea id="message" name="message" placeholder="Describe tu consulta con el mayor detalle posible..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn" id="submitBtn">
+                            <i class="fas fa-paper-plane"></i> Enviar Mensaje
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Preguntas Frecuentes</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Cómo puedo acceder a los cursos después del pago?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Después de realizar el pago y enviar el comprobante por WhatsApp o Telegram, nuestro equipo verificará tu pago (generalmente en menos de 2 horas). Una vez verificado, recibirás las credenciales de acceso a nuestra plataforma en Skool donde están alojados todos los cursos.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Qué métodos de pago aceptan?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Aceptamos múltiples métodos de pago: Bitcoin (BTC), Ethereum (ETH), USDT (TRC-20), transferencias bancarias, Yape, Plin y PayPal. Todos los detalles están disponibles en nuestra página de pagos.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Ofrecen reembolsos?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>No realizamos reembolsos. Dado que el acceso al contenido se entrega de forma inmediata, no es posible gestionar devoluciones. Te recomendamos revisar bien la información antes de confirmar tu compra.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Los cursos tienen soporte personalizado?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, todos nuestros estudiantes tienen acceso a soporte personalizado 24/7 a través de nuestra comunidad en Skool, WhatsApp y Telegram. También ofrecemos sesiones 1 a 1 para planes anuales.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Puedo cambiar de plan después de suscribirme?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Sí, puedes actualizar tu plan en cualquier momento. Solo necesitas pagar la diferencia y contactarnos para actualizar tu suscripción. Los downgrades se aplican en el siguiente período de facturación.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Los cursos están actualizados?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Actualizamos constantemente nuestro contenido para reflejar las últimas tendencias y cambios del mercado. Los estudiantes reciben automáticamente acceso a todas las actualizaciones y nuevo contenido sin costo adicional.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Qué nivel de experiencia necesito?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Nuestros cursos están diseñados para diferentes niveles. La mayoría son para principiantes, pero también tenemos contenido intermedio y avanzado. Cada curso especifica claramente los requisitos previos.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <button class="faq-question" onclick="toggleFAQ(this)">
+                        <span>¿Hay certificados al completar los cursos?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Actualmente nos enfocamos en resultados prácticos más que en certificaciones. Sin embargo, estamos trabajando en un sistema de certificación que estará disponible próximamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zaincky</h3>
+                    <p>Transformando vidas a través de la educación en negocios digitales</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../index.html#courses">Cursos</a></li>
+                        <li><a href="../index.html#testimonials">Testimonios</a></li>
+                        <li><a href="about.html">Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zaincky. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/utils.js"></script>
+    <script>
+        // Variables globales
+        let isSubmitting = false;
+        
+        // Configurar navegación móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            setupMobileNavigation();
+            setupFormValidation();
+        });
+        
+        // Configurar navegación móvil
+        function setupMobileNavigation() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Cerrar menú al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+        }
+        
+        // Configurar validación de formulario
+        function setupFormValidation() {
+            const form = document.getElementById('contactForm');
+            const inputs = form.querySelectorAll('input, textarea, select');
+            
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.classList.contains('error')) {
+                        validateField(this);
+                    }
+                });
+            });
+        }
+        
+        // Validar campo individual
+        function validateField(field) {
+            const value = field.value.trim();
+            let isValid = true;
+            let errorMessage = '';
+            
+            // Validaciones específicas
+            switch (field.name) {
+                case 'firstName':
+                case 'lastName':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Este campo es requerido';
+                    } else if (value.length < 2) {
+                        isValid = false;
+                        errorMessage = 'Mínimo 2 caracteres';
+                    }
+                    break;
+                    
+                case 'email':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'El email es requerido';
+                    } else if (!ValidationUtils.email(value)) {
+                        isValid = false;
+                        errorMessage = 'Email inválido';
+                    }
+                    break;
+                    
+                case 'phone':
+                    if (value && !ValidationUtils.phone(value)) {
+                        isValid = false;
+                        errorMessage = 'Teléfono inválido';
+                    }
+                    break;
+                    
+                case 'subject':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'Selecciona un asunto';
+                    }
+                    break;
+                    
+                case 'message':
+                    if (!value) {
+                        isValid = false;
+                        errorMessage = 'El mensaje es requerido';
+                    } else if (value.length < 10) {
+                        isValid = false;
+                        errorMessage = 'El mensaje debe tener al menos 10 caracteres';
+                    }
+                    break;
+            }
+            
+            // Mostrar/ocultar error
+            showFieldError(field, isValid, errorMessage);
+            return isValid;
+        }
+        
+        // Mostrar error en campo
+        function showFieldError(field, isValid, errorMessage) {
+            const formGroup = field.parentElement;
+            let errorElement = formGroup.querySelector('.field-error');
+            
+            if (!isValid) {
+                field.classList.add('error');
+                field.style.borderColor = 'var(--danger)';
+                
+                if (!errorElement) {
+                    errorElement = document.createElement('span');
+                    errorElement.className = 'field-error';
+                    errorElement.style.cssText = `
+                        color: var(--danger);
+                        font-size: var(--font-size-sm);
+                        margin-top: 4px;
+                        display: block;
+                    `;
+                    formGroup.appendChild(errorElement);
+                }
+                errorElement.textContent = errorMessage;
+            } else {
+                field.classList.remove('error');
+                field.style.borderColor = '';
+                if (errorElement) {
+                    errorElement.remove();
+                }
+            }
+        }
+        
+        // Manejar envío del formulario
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            if (isSubmitting) return;
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData);
+            
+            // Validar todos los campos
+            const inputs = form.querySelectorAll('input[required], textarea[required], select[required]');
+            let isFormValid = true;
+            
+            inputs.forEach(input => {
+                if (!validateField(input)) {
+                    isFormValid = false;
+                }
+            });
+            
+            if (!isFormValid) {
+                showNotification('Por favor corrige los errores en el formulario', 'error');
+                return;
+            }
+            
+            // Simular envío
+            submitForm(data);
+        }
+        
+        // Simular envío del formulario
+        async function submitForm(data) {
+            const submitBtn = document.getElementById('submitBtn');
+            const successMessage = document.getElementById('successMessage');
+            
+            try {
+                isSubmitting = true;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+                
+                // Simular delay de envío
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                // Mostrar mensaje de éxito
+                successMessage.style.display = 'block';
+                document.getElementById('contactForm').reset();
+                
+                // Generar mensaje para WhatsApp
+                const whatsappMessage = generateWhatsAppContactMessage(data);
+                
+                // Mostrar opciones de contacto
+                showContactOptions(whatsappMessage);
+                
+                showNotification('¡Mensaje enviado correctamente!', 'success');
+                
+            } catch (error) {
+                console.error('Error al enviar formulario:', error);
+                showNotification('Error al enviar el mensaje. Intenta de nuevo.', 'error');
+            } finally {
+                isSubmitting = false;
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Mensaje';
+                
+                // Ocultar mensaje de éxito después de 5 segundos
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+        }
+        
+        // Generar mensaje para WhatsApp
+        function generateWhatsAppContactMessage(data) {
+            return encodeURIComponent(
+                `¡Hola! Mensaje desde el formulario de contacto de Zaincky:\n\n` +
+                `👤 Nombre: ${data.firstName} ${data.lastName}\n` +
+                `📧 Email: ${data.email}\n` +
+                `📱 Teléfono: ${data.phone || 'No proporcionado'}\n` +
+                `📋 Asunto: ${data.subject}\n\n` +
+                `💬 Mensaje:\n${data.message}\n\n` +
+                `Fecha: ${new Date().toLocaleDateString('es-PE')}`
+            );
+        }
+        
+        // Mostrar opciones de contacto
+        function showContactOptions(whatsappMessage) {
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.8);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 10000;
+                padding: var(--space-md);
+            `;
+            
+            modal.innerHTML = `
+                <div style="
+                    background: var(--bg-secondary);
+                    border-radius: var(--border-radius-lg);
+                    padding: var(--space-lg);
+                    max-width: 400px;
+                    width: 100%;
+                    text-align: center;
+                ">
+                    <h3 style="color: var(--text-primary); margin-bottom: var(--space-md);">¡Mensaje Enviado!</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: var(--space-lg);">
+                        También puedes contactarnos directamente:
+                    </p>
+                    <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+                        <a href="https://wa.me/51927703410?text=${whatsappMessage}" 
+                           target="_blank" 
+                           class="btn btn-success" 
+                           style="flex: 1; min-width: 120px;">
+                            <i class="fab fa-whatsapp"></i> WhatsApp
+                        </a>
+                        <a href="https://t.me/Zaincky" 
+                           target="_blank" 
+                           class="btn btn-primary" 
+                           style="flex: 1; min-width: 120px;">
+                            <i class="fab fa-telegram"></i> Telegram
+                        </a>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="
+                                background: none;
+                                border: none;
+                                color: var(--text-secondary);
+                                margin-top: var(--space-md);
+                                cursor: pointer;
+                            ">
+                        Cerrar
+                    </button>
+                </div>
+            `;
+            
+            document.body.appendChild(modal);
+            
+            // Cerrar modal al hacer clic fuera
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.remove();
+                }
+            });
+        }
+        
+        // Toggle FAQ
+        function toggleFAQ(button) {
+            const faqItem = button.parentElement;
+            const answer = faqItem.querySelector('.faq-answer');
+            const isActive = button.classList.contains('active');
+            
+            // Cerrar todas las FAQs
+            document.querySelectorAll('.faq-question.active').forEach(q => {
+                q.classList.remove('active');
+                q.parentElement.querySelector('.faq-answer').classList.remove('active');
+            });
+            
+            // Si no estaba activa, abrir esta
+            if (!isActive) {
+                button.classList.add('active');
+                answer.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

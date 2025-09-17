@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros - Zaincky</title>
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <link rel="stylesheet" href="../assets/css/components.css">
+    <link rel="stylesheet" href="../assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.1) 0%, rgba(255, 107, 53, 0.1) 100%);
+            padding: calc(80px + var(--space-xl)) 0 var(--space-xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        }
+        
+        .about-hero .container {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-hero h1 {
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .about-hero p {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .story-section {
+            padding: var(--space-xl) 0;
+        }
+        
+        .story-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-xl);
+            align-items: center;
+        }
+        
+        .story-text h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--text-primary);
+        }
+        
+        .story-text p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: var(--space-md);
+        }
+        
+        .story-image {
+            text-align: center;
+        }
+        
+        .founder-card {
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+        
+        .founder-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+        
+        .founder-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            margin: 0 auto var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            font-weight: 800;
+        }
+        
+        .founder-name {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .founder-title {
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .founder-bio {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .values-section {
+            background: var(--bg-secondary);
+            padding: var(--space-xl) 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .value-card {
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: var(--transition-normal);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .value-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gradient);
+            transition: var(--transition-normal);
+        }
+        
+        .value-card:hover::before {
+            left: 0;
+        }
+        
+        .value-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .value-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 212, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto var(--space-md);
+            font-size: var(--font-size-2xl);
+            color: var(--accent-primary);
+        }
+        
+        .value-card h3 {
+            font-size: var(--font-size-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .value-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        .mission-section {
+            padding: var(--space-xl) 0;
+            text-align: center;
+        }
+        
+        .mission-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .mission-content h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            margin-bottom: var(--space-lg);
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .mission-text {
+            font-size: var(--font-size-lg);
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .stats-section {
+            background: var(--bg-secondary);
+            padding: var(--space-xl) 0;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-lg);
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: var(--space-lg);
+        }
+        
+        .stat-number {
+            font-size: var(--font-size-3xl);
+            font-weight: 800;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: var(--font-size-base);
+            font-weight: 600;
+        }
+        
+        .why-choose-section {
+            padding: var(--space-xl) 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-md);
+            margin-top: var(--space-lg);
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            padding: var(--space-md);
+            background: var(--bg-secondary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius);
+            transition: var(--transition-normal);
+        }
+        
+        .feature-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-primary);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--accent-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: var(--font-size-base);
+            flex-shrink: 0;
+        }
+        
+        .feature-content h4 {
+            font-weight: 600;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .feature-content p {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            line-height: 1.5;
+        }
+        
+        .team-section {
+            background: var(--bg-secondary);
+            padding: var(--space-xl) 0;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .team-member {
+            background: var(--bg-primary);
+            border: 1px solid var(--bg-tertiary);
+            border-radius: var(--border-radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            transition: var(--transition-normal);
+        }
+        
+        .team-member:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--accent-primary);
+        }
+        
+        .member-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--accent-gradient);
+            margin: 0 auto var(--space-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: var(--font-size-xl);
+            color: white;
+            font-weight: 700;
+        }
+        
+        .member-name {
+            font-size: var(--font-size-lg);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+            color: var(--text-primary);
+        }
+        
+        .member-role {
+            color: var(--accent-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .member-bio {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            line-height: 1.5;
+        }
+        
+        .cta-section {
+            padding: var(--space-xl) 0;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.05) 0%, rgba(255, 107, 53, 0.05) 100%);
+        }
+        
+        .cta-section h2 {
+            font-size: var(--font-size-2xl);
+            font-weight: 800;
+            margin-bottom: var(--space-sm);
+            color: var(--text-primary);
+        }
+        
+        .cta-section p {
+            font-size: var(--font-size-lg);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-lg);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="../index.html">
+                        <h1 class="logo">Zaincky</h1>
+                    </a>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="../index.html#courses">Cursos</a></li>
+                    <li><a href="../index.html#testimonials">Testimonios</a></li>
+                    <li><a href="about.html" class="active">Nosotros</a></li>
+                    <li><a href="contact.html">Contacto</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- About Hero -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Sobre Zaincky</h1>
+            <p>Somos más que una plataforma educativa. Somos tu socio estratégico en el camino hacia la libertad financiera a través de los negocios digitales.</p>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="story-section">
+        <div class="container">
+            <div class="story-content">
+                <div class="story-text">
+                    <h2>Nuestra Historia</h2>
+                    <p>
+                        Zaincky nació de la necesidad real de democratizar el acceso a la educación en negocios digitales. Después de años de experiencia en el mundo del emprendimiento online, nos dimos cuenta de que la información valiosa estaba fragmentada y muchas veces era inaccesible para quienes más la necesitaban.
+                    </p>
+                    <p>
+                        En 2025, decidimos crear una plataforma que no solo enseñara teoría, sino que proporcionara estrategias probadas y acompañamiento real para transformar vidas a través de los negocios digitales.
+                    </p>
+                    <p>
+                        Hoy, con más de 2,000 estudiantes activos y cientos de historias de éxito, seguimos comprometidos con nuestra misión de hacer que el conocimiento empresarial de calidad sea accesible para todos.
+                    </p>
+                </div>
+                <div class="story-image">
+                    <div class="founder-card">
+                        <div class="founder-avatar">Z</div>
+                        <div class="founder-name">Zaincky</div>
+                        <div class="founder-title">Fundador & CEO</div>
+                        <p class="founder-bio">
+                            Emprendedor con más de 5 años de experiencia en negocios digitales. Ha ayudado a cientos de personas a crear sus primeros ingresos en internet y vivir de esto.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Values -->
+    <section class="values-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Valores</h2>
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Transparencia</h3>
+                    <p>Creemos en la honestidad total. Te mostramos tanto los éxitos como los desafíos reales de cada modelo de negocio, sin promesas vacías ni resultados garantizados.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Resultados Reales</h3>
+                    <p>Nuestro enfoque está en estrategias probadas y aplicables. Cada curso está diseñado con base en experiencias reales y casos de éxito documentados.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Comunidad</h3>
+                    <p>Fomentamos un ambiente de apoyo mutuo donde los estudiantes pueden compartir experiencias, hacer networking y crecer juntos.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3>Educación Continua</h3>
+                    <p>El mundo digital evoluciona constantemente. Actualizamos nuestro contenido regularmente para mantener a nuestros estudiantes a la vanguardia.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h3>Compromiso</h3>
+                    <p>Estamos comprometidos con el éxito de cada estudiante. Ofrecemos soporte personalizado y seguimiento para asegurar el mejor resultado posible.</p>
+                </div>
+                
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Ética</h3>
+                    <p>Promovemos prácticas empresariales éticas y sustentables. Creemos en construir negocios que generen valor real para la sociedad.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content">
+                <h2>Nuestra Misión</h2>
+                <p class="mission-text">
+                    Democratizar el acceso a la educación empresarial de calidad, proporcionando las herramientas, conocimientos y soporte necesarios para que cualquier persona, independientemente de su origen o situación económica, pueda crear un negocio digital exitoso y alcanzar la libertad financiera.
+                </p>
+                <p class="mission-text">
+                    Creemos firmemente que el emprendimiento digital es una de las mejores formas de crear oportunidades económicas en la era actual, y estamos comprometidos a hacer que este conocimiento sea accesible, práctico y aplicable para todos.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">2,000+</div>
+                    <div class="stat-label">Estudiantes Activos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Tasa de Satisfacción</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Cursos Especializados</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Soporte Disponible</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us -->
+    <section class="why-choose-section">
+        <div class="container">
+            <h2 class="section-title">¿Por qué elegir Zaincky?</h2>
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Experiencia Comprobada</h4>
+                        <p>Nuestros instructores tienen años de experiencia real en cada área que enseñan.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Contenido Actualizado</h4>
+                        <p>Actualizamos constantemente nuestros cursos con las últimas tendencias y estrategias.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Soporte Premium</h4>
+                        <p>Acceso directo a nuestro equipo de expertos para resolver todas tus dudas.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Resultados Medibles</h4>
+                        <p>Metodologías probadas con métricas claras para medir tu progreso y éxito.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Acceso Móvil</h4>
+                        <p>Aprende desde cualquier lugar y en cualquier momento con nuestra plataforma móvil.</p>
+                    </div>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-users-cog"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h4>Comunidad Activa</h4>
+                        <p>Únete a una comunidad vibrante de emprendedores digitales como tú.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Nuestro Equipo</h2>
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">Z</div>
+                    <div class="member-name">Zaincky</div>
+                    <div class="member-role">CEO & Fundador</div>
+                    <p class="member-bio">Experto en negocios digitales con 5+ años de experiencia. Especialista en SMMA, Trading, Marketing y OFM.</p>
+                </div>
+                <!--
+                <div class="team-member">
+                    <div class="member-avatar">SM</div>
+                    <div class="member-name">Sofia Martinez</div>
+                    <div class="member-role">Directora de Contenido</div>
+                    <p class="member-bio">Experta en marketing digital y creación de contenido. Más de 6 años en la industria.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">AR</div>
+                    <div class="member-name">Alejandro Rodriguez</div>
+                    <div class="member-role">Instructor Senior</div>
+                    <p class="member-bio">Trader profesional con más de 10 años de experiencia en mercados financieros.</p>
+                </div>
+                
+                <div class="team-member">
+                    <div class="member-avatar">LP</div>
+                    <div class="member-name">Luis Perez</div>
+                    <div class="member-role">Soporte Técnico</div>
+                    <p class="member-bio">Ingeniero de sistemas especializado en plataformas educativas y experiencia de usuario.</p>
+                </div>
+                -->
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>¿Listo para comenzar tu transformación?</h2>
+            <p>Únete a miles de estudiantes que ya están construyendo su futuro financiero con Zaincky</p>
+            <a href="../index.html#courses" class="btn btn-primary btn-lg">
+                Ver Nuestros Cursos
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zaincky</h3>
+                    <p>Transformando vidas a través de la educación en negocios digitales</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="../index.html#courses">Cursos</a></li>
+                        <li><a href="../index.html#testimonials">Testimonios</a></li>
+                        <li><a href="about.html">Nosotros</a></li>
+                        <li><a href="contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zaincky. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/utils.js"></script>
+    <script>
+        // Configurar navegación móvil
+        document.addEventListener('DOMContentLoaded', function() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.querySelector('.nav-menu');
+            
+            if (hamburger) {
+                hamburger.addEventListener('click', function() {
+                    hamburger.classList.toggle('active');
+                    navMenu.classList.toggle('active');
+                });
+            }
+            
+            // Cerrar menú al hacer clic en un enlace
+            const navLinks = document.querySelectorAll('.nav-menu a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    hamburger.classList.remove('active');
+                    navMenu.classList.remove('active');
+                });
+            });
+            
+            // Animaciones de scroll
+            setupScrollAnimations();
+        });
+        
+        // Configurar animaciones de scroll
+        function setupScrollAnimations() {
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar elementos que se animan
+            const animatedElements = document.querySelectorAll('.value-card, .team-member, .feature-item, .stat-card');
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(el);
+            });
+        }
+    </script>
+</body>
+</html>

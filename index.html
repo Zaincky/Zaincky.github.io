@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zaincky</title>
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <h1 class="logo">Zaincky</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home">Inicio</a></li>
+                    <li><a href="#courses">Cursos</a></li>
+                    <li><a href="#testimonials">Testimonios</a></li>
+                    <li><a href="views/about.html">Nosotros</a></li>
+                    <li><a href="views/contact.html">Contacto</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Domina los <span class="highlight">Negocios Digitales</span> más Rentables</h1>
+                <p class="hero-subtitle">Aprende estrategias comprobadas para generar ingresos online con modelos de negocio escalables</p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>500+</h3>
+                        <p>Estudiantes Activos</p>
+                    </div>
+                    <div class="stat">
+                        <h3>95%</h3>
+                        <p>Tasa de Éxito</p>
+                    </div>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>Soporte Premium</p>
+                    </div>
+                </div>
+                <div class="hero-buttons">
+                    <a href="#courses" class="btn btn-primary">Ver Cursos</a>
+                    <a href="#testimonials" class="btn btn-secondary">Testimonios</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <h2 class="section-title">Planes de Suscripción</h2>
+            <div class="pricing-cards">
+                <div class="pricing-card">
+                    <h3>Mensual</h3>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">15</span>
+                        <span class="period">/mes</span>
+                    </div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i>Acceso completo al curso</li>
+                        <li><i class="fas fa-check"></i>Soporte 24/7</li>
+                        <li><i class="fas fa-check"></i>Actualizaciones constantes</li>
+                        <li><i class="fas fa-check"></i>Comunidad exclusiva</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('monthly', 15)">Comenzar Ahora</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="popular-badge">Más Popular</div>
+                    <h3>Anual</h3>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">150</span>
+                        <span class="period">/año</span>
+                    </div>
+                    <div class="savings">Ahorras $30</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i>Acceso completo a los cursos</li>
+                        <li><i class="fas fa-check"></i>Soporte 24/7</li>
+                        <li><i class="fas fa-check"></i>Actualizaciones constantes</li>
+                        <li><i class="fas fa-check"></i>Comunidad exclusiva</li>
+                        <li><i class="fas fa-check"></i>Sesiones 1 a 1</li>
+                        <li><i class="fas fa-check"></i>Bonus exclusivos</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('yearly', 150)">Comenzar Ahora</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <h3>Trimestral</h3>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">40</span>
+                        <span class="period">/3 meses</span>
+                    </div>
+                    <div class="savings">Ahorras $5</div>
+                    <ul class="features">
+                        <li><i class="fas fa-check"></i>Acceso completo al curso</li>
+                        <li><i class="fas fa-check"></i>Soporte 24/7</li>
+                        <li><i class="fas fa-check"></i>Actualizaciones constantes</li>
+                        <li><i class="fas fa-check"></i>Comunidad exclusiva</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="selectPlan('quarterly', 40)">Comenzar Ahora</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Courses Carousel -->
+    <section id="courses" class="courses">
+        <div class="container">
+            <h2 class="section-title">Nuestros Cursos</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="carousel" id="coursesCarousel">
+                        <!-- Los cursos se cargarán dinámicamente -->
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="previousCourse()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" onclick="nextCourse()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="carousel-dots" id="courseDots">
+                <!-- Los dots se generarán dinámicamente -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Carousel -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <h2 class="section-title">Lo que Dicen Nuestros Estudiantes</h2>
+            <div class="carousel-container">
+                <div class="carousel-wrapper">
+                    <div class="testimonials-carousel" id="testimonialsCarousel">
+                        <!-- Los testimonios se cargarán dinámicamente -->
+                    </div>
+                </div>
+                <button class="carousel-btn prev" onclick="previousTestimonial()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="carousel-btn next" onclick="nextTestimonial()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>¿Listo para Transformar tu Futuro Financiero?</h2>
+            <p>Únete a cientos de estudiantes que ya están generando ingresos reales desde casa sin importar la edad ni pais</p>
+            <a href="#courses" class="btn btn-primary">Comenzar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Zaincky</h3>
+                    <p>Transformando vidas a través de la educación en negocios digitales</p>
+                    <div class="social-links">
+                        <a href="https://t.me/zaincky"><i class="fab fa-telegram"></i></a>
+                        <a href="https://wa.me/51927703410"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://www.instagram.com/zaincky.fx/"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#courses">Cursos</a></li>
+                        <li><a href="#testimonials">Testimonios</a></li>
+                        <li><a href="views/about.html">Nosotros</a></li>
+                        <li><a href="views/contact.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Soporte</h4>
+                    <ul>
+                        <li><a href="#">Centro de Ayuda</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Términos de Servicio</a></li>
+                        <li><a href="#">Política de Privacidad</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Zaincky. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para imagen ampliada -->
+    <div id="imageModal" class="modal">
+        <span class="close" onclick="closeImageModal()">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
+
+    <!-- Scripts -->
+    <script src="models/courses.js"></script>
+    <script src="models/testimonials.js"></script>
+    <script src="models/payments.js"></script>
+    <script src="controllers/main.js"></script>
+    <script src="controllers/carousel.js"></script>
+    <script src="assets/js/utils.js"></script>
+</body>
+</html>
